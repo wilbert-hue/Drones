@@ -202,7 +202,7 @@ export default function DashboardPage() {
                 Coherent Dashboard
               </h1>
               <h2 className="text-sm text-black">
-                {dashboardName || 'Global Probe Cards and Pogo Test Sockets Market'}
+                {dashboardName || 'East Africa Crop Monitoring Drones Market'}
               </h2>
             </div>
           </div>

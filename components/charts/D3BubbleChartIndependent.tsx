@@ -4,7 +4,7 @@ import { useEffect, useRef, useMemo, useState } from 'react'
 import * as d3 from 'd3'
 import { useDashboardStore } from '@/lib/store'
 import { getChartColor } from '@/lib/chart-theme'
-import { filterData } from '@/lib/data-processor'
+import { filterData, DEFAULT_REGION_TO_COUNTRIES } from '@/lib/data-processor'
 import { GeographyMultiSelect } from '@/components/filters/GeographyMultiSelect'
 import { AggregationLevelSelector } from '@/components/filters/AggregationLevelSelector'
 import { CascadeFilter } from '@/components/filters/CascadeFilter'
@@ -470,7 +470,10 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
       // Check if data exists for selected geographies with the current segment type
       const selectedGeos = activeFilters.geographies || []
       const hasSpecificRegions = selectedGeos.length > 0 && !selectedGeos.includes('Global')
-      const regionalGeographies = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region']
+      const regionalGeographies = [
+        ...Object.keys(DEFAULT_REGION_TO_COUNTRIES),
+        ...Object.values(DEFAULT_REGION_TO_COUNTRIES).flat(),
+      ]
       const hasRegionalSelection = selectedGeos.some(g => regionalGeographies.includes(g))
 
       if (hasSpecificRegions && hasRegionalSelection) {
@@ -510,14 +513,13 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
 
           // Map Global data to each selected regional geography
           const regionalMarketShares: Record<string, number> = {
-            'North America': 0.31,
-            'Europe': 0.22,
-            'Asia Pacific': 0.41,
-            'Latin America': 0.02,
-            'Middle East & Africa': 0.04,
-            'ASEAN': 0.10,
-            'SAARC Region': 0.08,
-            'CIS Region': 0.05
+            'East Africa': 1,
+            Kenya: 0.32,
+            Tanzania: 0.22,
+            Uganda: 0.18,
+            Rwanda: 0.08,
+            Ethiopia: 0.14,
+            'Rest of East Africa': 0.06,
           }
 
           // Calculate sum of market shares for selected regions
@@ -612,7 +614,7 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
 
         if (isByRegionSegmentType) {
           const selectedGeos = activeFilters.geographies || []
-          const mainRegions = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region']
+          const mainRegions = Object.keys(DEFAULT_REGION_TO_COUNTRIES)
 
           // Check if a specific region is selected (not Global, not multiple regions)
           const isSingleRegionSelected = selectedGeos.length === 1 &&

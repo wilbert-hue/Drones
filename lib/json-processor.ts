@@ -1353,18 +1353,21 @@ export async function processJsonDataAsync(
     // Remove geographies from the list if they have no value/volume data
     // But keep them if they are regions or countries (which get data from "By Region" processing)
     const filteredGeographies = geographies.filter(g => {
+      if (g === 'Global') return false
       // Always keep regions and countries (they have data under parent geographies)
       if (regionGeographies.includes(g) || allCountries.includes(g)) return true
-      // For top-level geographies (like "Global"), only keep if they have actual data
+      // For top-level geographies, only keep if they have actual data
       return geographiesWithData.has(g)
     })
 
-    // Build geography dimension with full hierarchy
+    // Build geography dimension with full hierarchy (no Global)
     const geographyDimension: GeographyDimension = {
-      global: filteredGeographies.filter(g => !regionGeographies.includes(g) && !allCountries.includes(g)),
+      global: filteredGeographies.filter(
+        g => g !== 'Global' && !regionGeographies.includes(g) && !allCountries.includes(g)
+      ),
       regions: regionGeographies,
       countries: regionToCountries,
-      all_geographies: filteredGeographies
+      all_geographies: filteredGeographies.filter(g => g !== 'Global'),
     }
 
     console.log(`Geography dimension built with ${geographies.length} geographies:`, geographies)
@@ -1472,9 +1475,9 @@ export async function processJsonDataAsync(
     
     // Build metadata
     const metadata: Metadata = {
-      market_name: 'Probe Cards and Pogo Test Sockets Market',
+      market_name: 'East Africa Crop Monitoring Drones Market',
       market_type: 'Market Analysis',
-      industry: 'Healthcare & Pharmaceuticals',
+      industry: 'Agriculture & Precision Farming',
       years: allYears,
       start_year: startYear,
       base_year: baseYear,

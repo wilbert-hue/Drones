@@ -1,17 +1,18 @@
 export interface CustomerIntelligenceRow {
   sNo: number | string
   customerNameCompanyName: string
+  countryCoverage: string
   businessOverview: string
   exactCustomerType: string
-  waferSortFinalTestUseCase: string
-  totalAnnualRevenue: string
+  cropMonitoringDroneUseCase: string
+  revenueOrBudgetStatus: string
   customerSizeScale: string
   keyContactPerson: string
   designationRole: string
   emailAddress: string
   phoneWhatsappNumber: string
   linkedInProfile: string
-  websiteUrl: string
+  websiteUrl?: string
   keyBuyingCriteria?: string
   keyPainPoints?: string
   upcomingTriggersAndInitiatives?: string
@@ -24,8 +25,6 @@ export interface CustomerIntelligenceRow {
   integrationTechnicalServiceRequirements?: string
   performanceExpectations?: string
   customerBenchmarkingSummary?: string
-  additionalCommentsNotes?: string
-  salesPrioritizationNote?: string
 }
 
 export interface CustomerIntelligenceProposition {
@@ -66,22 +65,28 @@ export const CUSTOMER_INFO_COLUMNS: TableColumn[] = [
     headerClass: 'bg-[#FFF8DC]',
     minWidth: '180px',
   },
+  {
+    key: 'countryCoverage',
+    label: 'Country Coverage',
+    headerClass: 'bg-[#FFF8DC]',
+    minWidth: '140px',
+  },
   { key: 'businessOverview', label: 'Business Overview', headerClass: 'bg-[#FFF8DC]', minWidth: '200px' },
   {
     key: 'exactCustomerType',
-    label: 'Probe Card and Pogo Test Socket Exact Customer Type',
+    label: 'Crop Monitoring Drone Exact Customer Type',
     headerClass: 'bg-[#FFF8DC]',
     minWidth: '220px',
   },
   {
-    key: 'waferSortFinalTestUseCase',
-    label: 'Wafer Sort and Final Test Use Case',
+    key: 'cropMonitoringDroneUseCase',
+    label: 'Crop Monitoring Drone Use Case',
     headerClass: 'bg-[#FFF8DC]',
     minWidth: '220px',
   },
   {
-    key: 'totalAnnualRevenue',
-    label: 'Annual Revenue in United States Dollars Million, 2025',
+    key: 'revenueOrBudgetStatus',
+    label: 'Revenue or Budget Status',
     headerClass: 'bg-[#FFF8DC]',
     minWidth: '180px',
   },
@@ -104,27 +109,29 @@ export const CONTACT_COLUMNS: TableColumn[] = [
     minWidth: '170px',
   },
   { key: 'linkedInProfile', label: 'LinkedIn Profile', headerClass: 'bg-[#B0E0E6]', minWidth: '150px', isLink: 'url' },
-  { key: 'websiteUrl', label: 'Company Website', headerClass: 'bg-[#B0E0E6]', minWidth: '130px', isLink: 'url' },
 ]
 
-export const BUYING_DRIVERS_COLUMNS_BASIC: TableColumn[] = []
+export const CONTACT_COLUMNS_WITH_WEBSITE: TableColumn[] = [
+  ...CONTACT_COLUMNS,
+  { key: 'websiteUrl', label: 'Company Website', headerClass: 'bg-[#B0E0E6]', minWidth: '130px', isLink: 'url' },
+]
 
 export const BUYING_DRIVERS_COLUMNS_ADVANCE: TableColumn[] = [
   {
     key: 'keyBuyingCriteria',
-    label: 'Probe Card and Pogo Test Socket Buying Criteria',
+    label: 'Drone Buying Criteria',
     headerClass: 'bg-[#B0E0E6]',
     minWidth: '220px',
   },
   {
     key: 'keyPainPoints',
-    label: 'Probe Card and Pogo Test Socket Pain Points',
+    label: 'Crop Monitoring Pain Points',
     headerClass: 'bg-[#B0E0E6]',
     minWidth: '220px',
   },
   {
     key: 'upcomingTriggersAndInitiatives',
-    label: 'Buying Trigger, Technical Maturity, Risk Exposure, and Product Complexity',
+    label: 'Buying Trigger and Risk Exposure',
     headerClass: 'bg-[#B0E0E6]',
     minWidth: '240px',
   },
@@ -137,12 +144,6 @@ export const PURCHASING_BEHAVIOUR_COLUMNS_ADVANCE: TableColumn[] = [
     headerClass: 'bg-[#DDA0DD]',
     minWidth: '180px',
   },
-  {
-    key: 'procurementModel',
-    label: 'Procurement Model',
-    headerClass: 'bg-[#DDA0DD]',
-    minWidth: '200px',
-  },
 ]
 
 export const BUYING_DRIVERS_COLUMNS_PREMIUM: TableColumn[] = [
@@ -151,6 +152,12 @@ export const BUYING_DRIVERS_COLUMNS_PREMIUM: TableColumn[] = [
 ]
 
 export const PURCHASING_BEHAVIOUR_COLUMNS_PREMIUM: TableColumn[] = [
+  {
+    key: 'procurementModel',
+    label: 'Procurement Model',
+    headerClass: 'bg-[#DDA0DD]',
+    minWidth: '200px',
+  },
   {
     key: 'vendorSelectionCriteria',
     label: 'Vendor Selection Criteria',
@@ -180,7 +187,7 @@ export const SOLUTION_REQUIREMENTS_COLUMNS: TableColumn[] = [
   },
   {
     key: 'integrationTechnicalServiceRequirements',
-    label: 'Integration, Technical, and Service Requirements',
+    label: 'Integration Technical and Service Requirements',
     headerClass: 'bg-[#DEB887]',
     minWidth: '240px',
   },
@@ -195,21 +202,9 @@ export const SOLUTION_REQUIREMENTS_COLUMNS: TableColumn[] = [
 export const CMI_INSIGHTS_COLUMNS_PREMIUM: TableColumn[] = [
   {
     key: 'customerBenchmarkingSummary',
-    label: 'Benchmark Summary',
+    label: 'Benchmark Summary and Additional Coherent Market Insights Notes',
     headerClass: 'bg-[#B0E0E6]',
-    minWidth: '200px',
-  },
-  {
-    key: 'additionalCommentsNotes',
-    label: 'Additional Customer Market Intelligence Notes',
-    headerClass: 'bg-[#B0E0E6]',
-    minWidth: '220px',
-  },
-  {
-    key: 'salesPrioritizationNote',
-    label: 'Sales Prioritization Note',
-    headerClass: 'bg-[#B0E0E6]',
-    minWidth: '200px',
+    minWidth: '280px',
   },
 ]
 
@@ -221,37 +216,37 @@ export type PropositionTableConfig = {
 export const PROPOSITION_TABLE_CONFIG: Record<'proposition1' | 'proposition2' | 'proposition3', PropositionTableConfig> = {
   proposition1: {
     groups: [
-      { label: 'Customer Information', colSpan: 5, headerClass: 'bg-[#E8C4A0]' },
-      { label: 'Contact Details', colSpan: 7, headerClass: 'bg-[#87CEEB]' },
+      { label: 'Customer Information', colSpan: 6, headerClass: 'bg-[#E8C4A0]' },
+      { label: 'Contact Details', colSpan: 6, headerClass: 'bg-[#87CEEB]' },
     ],
     columns: [...CUSTOMER_INFO_COLUMNS, ...CONTACT_COLUMNS],
   },
   proposition2: {
     groups: [
-      { label: 'Customer Information', colSpan: 5, headerClass: 'bg-[#E8C4A0]' },
+      { label: 'Customer Information', colSpan: 6, headerClass: 'bg-[#E8C4A0]' },
       { label: 'Contact Details', colSpan: 7, headerClass: 'bg-[#87CEEB]' },
       { label: 'Buying Drivers', colSpan: 3, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Purchasing Behaviour Metrics', colSpan: 2, headerClass: 'bg-[#9370DB] text-white' },
+      { label: 'Purchasing Behaviour Metrics', colSpan: 1, headerClass: 'bg-[#9370DB] text-white' },
     ],
     columns: [
       ...CUSTOMER_INFO_COLUMNS,
-      ...CONTACT_COLUMNS,
+      ...CONTACT_COLUMNS_WITH_WEBSITE,
       ...BUYING_DRIVERS_COLUMNS_ADVANCE,
       ...PURCHASING_BEHAVIOUR_COLUMNS_ADVANCE,
     ],
   },
   proposition3: {
     groups: [
-      { label: 'Customer Information', colSpan: 5, headerClass: 'bg-[#E8C4A0]' },
+      { label: 'Customer Information', colSpan: 6, headerClass: 'bg-[#E8C4A0]' },
       { label: 'Contact Details', colSpan: 7, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Buying Drivers', colSpan: 5, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Purchasing Behaviour Metrics', colSpan: 3, headerClass: 'bg-[#9370DB] text-white' },
+      { label: 'Buying Drivers', colSpan: 4, headerClass: 'bg-[#87CEEB]' },
+      { label: 'Purchasing Behaviour Metrics', colSpan: 4, headerClass: 'bg-[#9370DB] text-white' },
       { label: 'Solution Requirements', colSpan: 3, headerClass: 'bg-[#D4A574]' },
-      { label: 'CMI Insights', colSpan: 3, headerClass: 'bg-[#87CEEB]' },
+      { label: 'CMI Insights', colSpan: 1, headerClass: 'bg-[#87CEEB]' },
     ],
     columns: [
       ...CUSTOMER_INFO_COLUMNS,
-      ...CONTACT_COLUMNS,
+      ...CONTACT_COLUMNS_WITH_WEBSITE,
       ...BUYING_DRIVERS_COLUMNS_PREMIUM,
       ...PURCHASING_BEHAVIOUR_COLUMNS_PREMIUM,
       ...SOLUTION_REQUIREMENTS_COLUMNS,
@@ -261,7 +256,7 @@ export const PROPOSITION_TABLE_CONFIG: Record<'proposition1' | 'proposition2' | 
 }
 
 export async function loadCustomerIntelligenceData(): Promise<CustomerIntelligenceData> {
-  const response = await fetch('/data/customer-intelligence.json')
+  const response = await fetch('/data/customer-intelligence.json', { cache: 'no-store' })
   if (!response.ok) {
     throw new Error('Failed to load customer intelligence data')
   }

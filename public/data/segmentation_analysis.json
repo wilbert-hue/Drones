@@ -1,78 +1,57 @@
 {
-  "Global": {
-    "By Product Type": {
-      "Probe Cards": {
-        "Cantilever Probe Cards": {},
-        "Vertical Probe Cards": {}
+  "East Africa": {
+    "By Drone Type": {
+      "Fixed-Wing Drones": {},
+      "Rotary-Wing Drones": {},
+      "Hybrid VTOL Drones": {}
+    },
+    "By Application": {
+      "Field Mapping and Surveying": {},
+      "Crop Health and Stress Monitoring": {},
+      "Pest and Disease Detection": {},
+      "Irrigation and Water Management": {},
+      "Plant Counting and Yield Estimation": {},
+      "Soil and Nutrient Assessment": {}
+    },
+    "By Farm Size": {
+      "Smallholder Farms (Less than 20 Hectares)": {},
+      "Commercial Farms (20-500 Hectares)": {},
+      "Large Commercial Farms and Plantations (More than 500 Hectares)": {}
+    },
+    "By Sales Channel": {
+      "Direct Sales": {},
+      "Distributor and Dealer Sales": {}
+    },
+    "By End User": {
+      "Individual Farmers": {},
+      "Commercial Farms and Plantations": {},
+      "Government and Research Institutions": {}
+    },
+    "By Component": {
+      "Hardware": {
+        "Airframes and Structures": {},
+        "Propulsion Systems": {},
+        "Imaging Cameras": {},
+        "Sensing Systems (Multispectral, Thermal, LiDAR, Hyperspectral)": {},
+        "Communication and Navigation Systems": {}
       },
-      "Pogo Test Sockets": {
-        "Standard Signal Pogo Test Sockets": {},
-        "RF Pogo Test Sockets": {},
-        "Power Pogo Test Sockets": {},
-        "Kelvin Pogo Test Sockets": {}
+      "Software": {},
+      "Services": {
+        "Crop Monitoring Services": {},
+        "Aerial Mapping Services": {},
+        "Precision Agriculture Consulting Services": {},
+        "Training and Certification Services": {},
+        "Maintenance and Support Services": {}
       }
     },
-    "By Probe Card Fabrication Technology": {
-      "Conventional Needle-Based Probe Technology": {},
-      "Buckling Beam Probe Technology": {},
-      "MEMS-Based Probe Technology": {},
-      "Thin-Film Probe Technology": {}
-    },
-    "By Testing Stage": {
-      "Wafer Probe Testing": {},
-      "Final Package Testing": {},
-      "Burn-In and Reliability Testing": {},
-      "Engineering, Characterization, and Failure Analysis Testing": {}
-    },
-    "By Semiconductor Device Type": {
-      "Memory Devices": {},
-      "Digital Logic, Processor, ASIC, and SoC Devices": {},
-      "Analog and Mixed-Signal Non-RF ICs": {},
-      "RF, Microwave, and Wireless ICs": {},
-      "Power Discrete Devices and Power ICs": {},
-      "Optoelectronic and Imaging Devices": {},
-      "MEMS Devices and Other Specialty Semiconductor Devices": {}
-    },
-    "By Direct Customer Type": {
-      "Integrated Device Manufacturers": {},
-      "Pure-Play Foundries": {},
-      "OSAT Companies": {},
-      "Independent Semiconductor Test Service Providers": {},
-      "Research, Development, and Failure Analysis Laboratories": {}
-    },
     "By Region": {
-      "North America": {
-        "U.S.": {},
-        "Canada": {}
-      },
-      "Europe": {
-        "U.K.": {},
-        "Germany": {},
-        "France": {},
-        "Italy": {},
-        "Spain": {},
-        "Russia": {},
-        "Rest of Europe": {}
-      },
-      "Asia Pacific": {
-        "China": {},
-        "India": {},
-        "Japan": {},
-        "South Korea": {},
-        "ASEAN": {},
-        "Australia": {},
-        "Rest of Asia Pacific": {}
-      },
-      "Middle East & Africa": {
-        "GCC": {},
-        "South Africa": {},
-        "Rest of Middle East & Africa": {}
-      },
-      "Latin America": {
-        "Brazil": {},
-        "Argentina": {},
-        "Mexico": {},
-        "Rest of Latin America": {}
+      "East Africa": {
+        "Kenya": {},
+        "Tanzania": {},
+        "Uganda": {},
+        "Rwanda": {},
+        "Ethiopia": {},
+        "Rest of East Africa": {}
       }
     }
   }

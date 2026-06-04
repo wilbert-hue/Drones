@@ -35,11 +35,11 @@ export function GeographyMultiSelect() {
     }
 
     const geo = data.dimensions.geographies
-    const globalItems = geo.global || []
+    const globalItems = (geo.global || []).filter((g) => g !== 'Global')
     const regions = geo.regions || []
     const countries = geo.countries || {}
     const hasHierarchy = regions.length > 0
-    const flatOptions = geo.all_geographies || []
+    const flatOptions = (geo.all_geographies || []).filter((g) => g !== 'Global')
 
     return { globalItems, regions, countries, hasHierarchy, flatOptions }
   }, [data])
@@ -75,7 +75,7 @@ export function GeographyMultiSelect() {
   const handleSelectAll = () => {
     if (!data) return
     updateFilters({
-      geographies: data.dimensions.geographies.all_geographies
+      geographies: (data.dimensions.geographies.all_geographies || []).filter((g) => g !== 'Global'),
     })
   }
 
