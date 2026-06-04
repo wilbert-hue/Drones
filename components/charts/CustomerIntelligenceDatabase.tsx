@@ -83,6 +83,12 @@ function PropositionTable({
   rows: CustomerIntelligenceRow[]
 }) {
   const config = PROPOSITION_TABLE_CONFIG[propositionKey]
+  const groupColSpanTotal = config.groups.reduce((sum, group) => sum + group.colSpan, 0)
+  if (groupColSpanTotal !== config.columns.length && process.env.NODE_ENV === 'development') {
+    console.warn(
+      `Customer intelligence table "${propositionKey}": group colSpan (${groupColSpanTotal}) does not match column count (${config.columns.length})`
+    )
+  }
 
   return (
     <div className="overflow-x-auto">

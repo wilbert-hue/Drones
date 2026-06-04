@@ -92,8 +92,14 @@ export const CUSTOMER_INFO_COLUMNS: TableColumn[] = [
   },
 ]
 
-export const CONTACT_COLUMNS: TableColumn[] = [
-  { key: 'customerSizeScale', label: 'Size and Scale', headerClass: 'bg-[#B0E0E6]', minWidth: '180px' },
+/** Customer Information through Size and Scale (matches Excel cols 1–7) */
+export const CUSTOMER_INFO_WITH_SIZE: TableColumn[] = [
+  ...CUSTOMER_INFO_COLUMNS,
+  { key: 'customerSizeScale', label: 'Size and Scale', headerClass: 'bg-[#FFF8DC]', minWidth: '180px' },
+]
+
+/** Contact Details without size or website (matches Excel cols 8–12) */
+export const CONTACT_DETAILS_COLUMNS: TableColumn[] = [
   {
     key: 'keyContactPerson',
     label: 'Relevant Key Contact Person',
@@ -111,9 +117,9 @@ export const CONTACT_COLUMNS: TableColumn[] = [
   { key: 'linkedInProfile', label: 'LinkedIn Profile', headerClass: 'bg-[#B0E0E6]', minWidth: '150px', isLink: 'url' },
 ]
 
-export const CONTACT_COLUMNS_WITH_WEBSITE: TableColumn[] = [
-  ...CONTACT_COLUMNS,
-  { key: 'websiteUrl', label: 'Company Website', headerClass: 'bg-[#B0E0E6]', minWidth: '130px', isLink: 'url' },
+export const CONTACT_COLUMNS: TableColumn[] = [
+  { key: 'customerSizeScale', label: 'Size and Scale', headerClass: 'bg-[#B0E0E6]', minWidth: '180px' },
+  ...CONTACT_DETAILS_COLUMNS,
 ]
 
 export const BUYING_DRIVERS_COLUMNS_ADVANCE: TableColumn[] = [
@@ -137,18 +143,24 @@ export const BUYING_DRIVERS_COLUMNS_ADVANCE: TableColumn[] = [
   },
 ]
 
-export const PURCHASING_BEHAVIOUR_COLUMNS_ADVANCE: TableColumn[] = [
-  {
-    key: 'budgetOwnership',
-    label: 'Budget Owner',
-    headerClass: 'bg-[#DDA0DD]',
-    minWidth: '180px',
-  },
+/** Buying Drivers: website + criteria columns (matches Excel cols 13–16) */
+export const BUYING_DRIVERS_WITH_WEBSITE: TableColumn[] = [
+  { key: 'websiteUrl', label: 'Company Website', headerClass: 'bg-[#B0E0E6]', minWidth: '130px', isLink: 'url' },
+  ...BUYING_DRIVERS_COLUMNS_ADVANCE,
 ]
 
-export const BUYING_DRIVERS_COLUMNS_PREMIUM: TableColumn[] = [
-  ...BUYING_DRIVERS_COLUMNS_ADVANCE,
-  ...PURCHASING_BEHAVIOUR_COLUMNS_ADVANCE,
+/** Budget Owner is the fifth Buying Drivers column in Proposition 3 (Excel col 17) */
+export const BUDGET_OWNER_COLUMN: TableColumn = {
+  key: 'budgetOwnership',
+  label: 'Budget Owner',
+  headerClass: 'bg-[#B0E0E6]',
+  minWidth: '180px',
+}
+
+/** Proposition 3 Buying Drivers: website, criteria, and budget owner (Excel cols 13–17) */
+export const BUYING_DRIVERS_PREMIUM: TableColumn[] = [
+  ...BUYING_DRIVERS_WITH_WEBSITE,
+  BUDGET_OWNER_COLUMN,
 ]
 
 export const PURCHASING_BEHAVIOUR_COLUMNS_PREMIUM: TableColumn[] = [
@@ -223,31 +235,29 @@ export const PROPOSITION_TABLE_CONFIG: Record<'proposition1' | 'proposition2' | 
   },
   proposition2: {
     groups: [
-      { label: 'Customer Information', colSpan: 6, headerClass: 'bg-[#E8C4A0]' },
-      { label: 'Contact Details', colSpan: 7, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Buying Drivers', colSpan: 3, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Purchasing Behaviour Metrics', colSpan: 1, headerClass: 'bg-[#9370DB] text-white' },
+      { label: 'Customer Information', colSpan: 7, headerClass: 'bg-[#E8C4A0]' },
+      { label: 'Contact Details', colSpan: 5, headerClass: 'bg-[#87CEEB]' },
+      { label: 'Buying Drivers', colSpan: 4, headerClass: 'bg-[#87CEEB]' },
     ],
     columns: [
-      ...CUSTOMER_INFO_COLUMNS,
-      ...CONTACT_COLUMNS_WITH_WEBSITE,
-      ...BUYING_DRIVERS_COLUMNS_ADVANCE,
-      ...PURCHASING_BEHAVIOUR_COLUMNS_ADVANCE,
+      ...CUSTOMER_INFO_WITH_SIZE,
+      ...CONTACT_DETAILS_COLUMNS,
+      ...BUYING_DRIVERS_WITH_WEBSITE,
     ],
   },
   proposition3: {
     groups: [
-      { label: 'Customer Information', colSpan: 6, headerClass: 'bg-[#E8C4A0]' },
-      { label: 'Contact Details', colSpan: 7, headerClass: 'bg-[#87CEEB]' },
-      { label: 'Buying Drivers', colSpan: 4, headerClass: 'bg-[#87CEEB]' },
+      { label: 'Customer Information', colSpan: 7, headerClass: 'bg-[#E8C4A0]' },
+      { label: 'Contact Details', colSpan: 5, headerClass: 'bg-[#87CEEB]' },
+      { label: 'Buying Drivers', colSpan: 5, headerClass: 'bg-[#87CEEB]' },
       { label: 'Purchasing Behaviour Metrics', colSpan: 4, headerClass: 'bg-[#9370DB] text-white' },
       { label: 'Solution Requirements', colSpan: 3, headerClass: 'bg-[#D4A574]' },
       { label: 'CMI Insights', colSpan: 1, headerClass: 'bg-[#87CEEB]' },
     ],
     columns: [
-      ...CUSTOMER_INFO_COLUMNS,
-      ...CONTACT_COLUMNS_WITH_WEBSITE,
-      ...BUYING_DRIVERS_COLUMNS_PREMIUM,
+      ...CUSTOMER_INFO_WITH_SIZE,
+      ...CONTACT_DETAILS_COLUMNS,
+      ...BUYING_DRIVERS_PREMIUM,
       ...PURCHASING_BEHAVIOUR_COLUMNS_PREMIUM,
       ...SOLUTION_REQUIREMENTS_COLUMNS,
       ...CMI_INSIGHTS_COLUMNS_PREMIUM,
